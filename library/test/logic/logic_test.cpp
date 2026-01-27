@@ -348,25 +348,66 @@ TEST(Logic, TempHandling)
     // Set the temperature to 25 degrees Celsius.
 
     constexpr int16_t temperature{25};
-    stub.setTemprature(temperature);
-    EXPECT_EQ(stub.read(), temperature);
+    mock.tempSensor.setTemperature(temperature);
+    EXPECT_EQ(mock.tempSensor.read(), temperature);
+
 
     // Case 1 - Press the toggle button, simulate button event.
     // Expect the temperature to not be printed, since the wrong button was pressed.
     {
+        // Get the number of printouts before the button press.
+        const auto printout1 = mock.logicImpl->tempPrintoutCount();
 
-        //! @note Don't forget to simulate the debounce timer timeout after the button event.
+        mock.toggleButton.write(true);
+
+        logic.handleButtonEvent();
+
+        mock.toggleButton.write(false);
+
+        // Get the number of printouts after the button press.
+        const auto printout2 = mock.logicImpl->tempPrintoutCount();
+
+        // Expect no printout to occur when pressing the toggle button (it's the wrong button).
+        EXPECT_EQ(printout2, printout1);
+
+        mock.debounceTimer.setTimedOut(true);
+
+        logic.handleDebounceTimerTimeout();
+
     }
 
     // Case 2 - Press the temperature button, simulate button event.
     // Expect the temperature to be printed once.
     {
-        //! @note Don't forget to simulate the debounce timer timeout after the button event.
+        // Get the number of printouts before the button press.
+        const auto printout1 = mock.logicImpl->tempPrintoutCount();
+
+        mock.tempButton.write(true);
+       
+        logic.handleButtonEvent();
+
+        mock.tempButton.write(false);
+
+        // Get the number of printouts after the button press.
+        const auto printout2 = mock.logicImpl->tempPrintoutCount();
+
+        EXPECT_EQ(printout2, printout1 + 1U);
+        mock.debounceTimer.setTimedOut(true);
+
+        logic.handleDebounceTimerTimeout();
     }
 
     // Case 3 - Simulate temperature timer timeout.
     // Expect the temperature to be printed once more.
     {
+        const auto printout1 = mock.logicImpl->tempPrintoutCount();
+
+        mock.tempTimer.setTimedOut(true);
+        logic.handleTempTimerTimeout();
+
+        const auto printout2 = mock.logicImpl->tempPrintoutCount();
+        EXPECT_EQ(printout2,printout1 + 1U);
+
     }
 }
 
@@ -377,23 +418,39 @@ TEST(Logic, TempHandling)
  */
 TEST(Logic, Eeprom)
 {
+
     // Case 1 - Verify that the toggle timer is disabled at startup if its EEPROM bit is not set.
-    // This simulates the timer being disabled before the last poweroff.
+    // This simulates the timer being disabled before the last poweroff
+
     {    
         // Create logic implementation and run the system.
-
+    Mock mock{}
+    logic::Interface& logic{mock.createLogic()};
+    mock.runSystem();
+    EXPECT_FALSE(mock.toggleTimer.isEnabled());
+    void (logic);
         // Verify that the toggle timer is disabled after initialization.
     }
 
     // Case 2 - Verify that the toggle timer is enabled at startup if its EEPROM bit is set.
     // This simulates the timer being enabled before the last poweroff.
     {    
+        const uint16_t toggleAddr{logic::Stub::toggleStateAddr()};
+        constexpr uint8_t enableByte{1U}; // Can be a boolean also. Enablebyte is not declared. 
+
         // Mark the toggle timer to have been enabled before poweroff by setting the
         // associated bit in EEPROM before creating the logic implementation.
+
+        Mock mock{};
+        mock.eeprom.write(toggleAddr,enableByte);
         
         // Create logic implementation and run the system.
-
+        logic::Interface& logic{mock.createLogic()};
+        mock.runSystem();
         // Verify that the toggle timer was enabled during initialization.
+        EXPECT_TRUE(mock.toggleTimer.isEnabled());
+        void (logic);
+
     }
 }
 } // namespace

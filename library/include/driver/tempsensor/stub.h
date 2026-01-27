@@ -45,9 +45,9 @@ public:
      */
     int16_t read() const noexcept override { return myRead; }
 
-    void setTemprature (int16_t temprature) noexcept 
+    void setTemperature (int16_t temperature) noexcept 
     {
-       myRead = temperature
+       myRead = temperature;
     }
 
     Stub(const Stub&)            = delete; // No copy constructor.
