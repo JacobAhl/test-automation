@@ -215,7 +215,7 @@ void Logic::restoreToggleStateFromEeprom() noexcept
     }
 }
 // -----------------------------------------------------------------------------
-bool logic::readSerialPort(); noexcept;
+bool Logic::readSerialPort() noexcept
 {
     // BUFFER
     constexpr uint16_t bufferSize{5U};
@@ -261,7 +261,7 @@ bool logic::readSerialPort(); noexcept;
             //
             case 's':
             {
-                const char* state{myToggleTimer.isEnabled() ? "enabled : disabeled"};
+                const char* state{myToggleTimer.isEnabled() ? "enabled" : "disabeled"};
                 mySerial.printf("The toggle timer is %s!\n",state);
                 break;
             }

@@ -424,11 +424,11 @@ TEST(Logic, Eeprom)
 
     {    
         // Create logic implementation and run the system.
-    Mock mock{}
-    logic::Interface& logic{mock.createLogic()};
-    mock.runSystem();
-    EXPECT_FALSE(mock.toggleTimer.isEnabled());
-    void (logic);
+        Mock mock{};
+        logic::Interface& logic{mock.createLogic()};
+        mock.runSystem();
+        EXPECT_FALSE(mock.toggleTimer.isEnabled());
+        (void) (logic);
         // Verify that the toggle timer is disabled after initialization.
     }
 
@@ -449,7 +449,7 @@ TEST(Logic, Eeprom)
         mock.runSystem();
         // Verify that the toggle timer was enabled during initialization.
         EXPECT_TRUE(mock.toggleTimer.isEnabled());
-        void (logic);
+        (void) (logic);
 
     }
 }
