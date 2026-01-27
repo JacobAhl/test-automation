@@ -219,11 +219,13 @@ TEST(Logic, ToggleHandling)
     // Case 1 - Press the temperature button, simulate button event.
     // Expect the toggle timer to not be enabled, since the wrong button was pressed.
     {
+        //! @note Don't forget to simulate the debounce timer timeout after the button event.
     }
 
     // Case 2 - Press the toggle button, simulate button event.
     // Expect the toggle timer to be enabled.
     {
+        //! @note Don't forget to simulate the debounce timer timeout after the button event.
     }
 
     // Case 3 - Simulate toggle timer timeout, expect the LED to be enabled.
@@ -241,6 +243,7 @@ TEST(Logic, ToggleHandling)
     // Case 6 - Press the toggle button once more, simulate button event.
     // Expect the toggle timer and LED to be disabled.
     {
+        //! @note Don't forget to simulate the debounce timer timeout after the button event.
     }
 
     // Case 7 - Simulate temperature timer timeout, expect the LED to be unaffected.
@@ -253,7 +256,7 @@ TEST(Logic, ToggleHandling)
 }
 
 /**
- * @brief Tempetaure handling test.
+ * @brief Temperature handling test.
  *
  *        Verify that the temperature handling behaves as expected.
  */
@@ -261,18 +264,20 @@ TEST(Logic, TempHandling)
 {
     // Create logic implementation and run the system.
     
-    // Expect the temperature timer to be disabled at the start.
+    // Expect the temperature timer to be enabled at the start.
 
     // Set the temperature to 25 degrees Celsius.
 
     // Case 1 - Press the toggle button, simulate button event.
     // Expect the temperature to not be printed, since the wrong button was pressed.
     {
+        //! @note Don't forget to simulate the debounce timer timeout after the button event.
     }
 
     // Case 2 - Press the temperature button, simulate button event.
     // Expect the temperature to be printed once.
     {
+        //! @note Don't forget to simulate the debounce timer timeout after the button event.
     }
 
     // Case 3 - Simulate temperature timer timeout.

@@ -1,55 +1,33 @@
-# L10 - Projektpresentation och kursavslutning
+# L10 - Slutförande av testsvit och kursavslutning
 
 ## Dagordning
-* Projektpresentationer (ca 10-15 minuter per grupp).
-* Diskussion och frågor efter varje presentation.
+* Slutförande av testsviten.
+* Säkerställande av fungerande testkörningar.
+* Inlämning av projekt.
 * Kurssammanfattning och reflektion.
-* Kursutvärdering och feedback.
+* Kursutvärdering.
 
 ## Mål med lektionen
-* Presentera ert projekt för klassen och lärare.
-* Demonstrera er testsvit och testresultat.
+* Slutföra och verifiera att hela testsviten kompilerar och körs korrekt.
+* Förbereda projektet för inlämning.
+* Förstå kraven för den kommande redovisningen.
 * Reflektera över lärdomar från kursen.
-* Ge och ta emot konstruktiv feedback.
 
-## Projektpresentation
+## Instruktioner
 
-### Presentationsformat
-* **Tid**: 10-15 minuter per grupp + 5 minuter för frågor.
-* **Format**: Projektpresentation, exempelvis med power point, samt live-demo.
-* **Båda gruppmedlemmar** ska delta aktivt i presentationen.
-* **Bedömning**: Presentationen ingår i projektbedömningen och betygsätts tillsammans med er inlämning.
+### 1. Slutför testsviten
 
-### Vad ska presentationen innehålla?
+* Säkerställ att alla tester kompilerar och körs utan fel.
+* Kontrollera att testsviten täcker samtliga efterfrågade testnivåer.
+* Kör igenom testerna och verifiera testresultaten.
+* Rätta eventuella kvarstående buggar.
 
-1. **Introduktion** (1-2 minuter)
-   * Kort översikt av projektet och testsviten.
-   * Vilka testnivåer ni implementerat.
+Målet är att projektet vid lektionens slut ska vara helt körbart och redo för inlämning.
 
-2. **Testningsstrategi** (2-3 minuter)
-   * Er approach till enhetstester, komponenttester och integrationstester.
-   * Hur ni använde virtuell hårdvaruplatform och stubklasser.
-   * Utmaningar ni stötte på och hur ni löste dem.
+### 2. Inlämning
 
-3. **Demonstration** (4-6 minuter)
-   * **Live-körning av testsviten**: Visa att testerna kompilerar och körs.
-   * **Kodgenomgång**: Visa exempel på era tester (välj 1-2 intressanta testfall).
-   * **För VG**: Demonstrera Python-skriptet för seriell kommunikation med hårdvaran.
-
-4. **Resultat och lärdomar** (2-3 minuter)
-   * Testresultat och täckning.
-   * Eventuella buggar ni hittade och åtgärdade.
-   * Vad fungerade bra? Vad skulle ni göra annorlunda?
-   * Viktigaste lärdomar om testning av inbyggda system.
-
-5. **Frågor och diskussion** (5 minuter)
-
-### Tips för presentationen
-* **Förbered er väl**: Testa teknik och demo i förväg.
-* **Var konkreta**: Visa kod och resultat, inte bara prata om dem.
-* **Fokusera på det intressanta**: Välj era bästa/mest utmanande tester att demonstrera.
-* **Håll tiden**: Respektera tidsgränsen så alla grupper hinner presentera.
-* **Var ärliga**: Det är OK att prata om utmaningar och vad som inte fungerade.
+Projektet ska lämnas in enligt checklistan nedan. Om ni blir klara under lektionen kan ni 
+redovisa direkt för läraren. I annat fall bokas redovisningstid senare via Google Classroom.
 
 ## Inlämning - Checklista
 
@@ -59,7 +37,7 @@ Kontrollera att ert projekt är komplett innan veckans slut:
 - **Lärare tillagd som collaborator**.
 - **All testkod implementerad och fungerande**:
   - Enhetstester (GPIO, serial, timer, smart tempsensor, linjär regressionsmodell).
-  - Komponenttester (Logik-implementationen).
+  - Komponenttester (logik-implementationen).
   - Stubklasser implementerade.
 - **Dokumentation**:
   - README-fil med instruktioner för att köra testerna.
@@ -76,11 +54,11 @@ Kontrollera att ert projekt är komplett innan veckans slut:
 ### Vad vi har gått igenom
 
 * **L01**: Introduktion till testautomation och Google Test.
-* **L02-L04**: Unittester av drivers med en virtuell hårdvaruplatform.
+* **L02-L04**: Unittester av drivers med en virtuell hårdvaruplattform.
 * **L05-L07**: Stubklasser och komponenttestning.
 * **L08**: Manuell SW/HW-integrationstestning på target.
 * **L09**: Automatiserad testning med Python och seriell kommunikation.
-* **L10**: Projektpresentation och avslutning.
+* **L10**: Slutförande av testsvit och avslutning.
 
 ### Viktiga koncept
 * **Testnivåer**: Unit, component, integration och system.

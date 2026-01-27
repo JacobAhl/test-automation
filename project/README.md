@@ -239,7 +239,7 @@ För att underlätta testning av seriell kommunikation och programflöde på ver
 
 **Testfall att implementera** (se L09 för detaljer):
 * Toggle-funktionalitet via kommandot `t`.
-* Status-avläsning via kommandot `s`.
+* Status-avläsning via kommandot `s` (kan/bör göras tillsammans med test av toggle-funktionaliteten).
 * Temperaturavläsning via kommandot `r`.
 * Felhantering vid ogiltiga kommandon.
 
@@ -321,7 +321,7 @@ library/test/
 │   └── lin_reg/
 │       └── fixed_test.cpp            # Regressions-tester, ska implementeras i helklass.
 └── scripts/
-    └── serial_test.py                # Python-skript för seriell kommunikation, ska implementeras.
+    └── serial_test.py                # Python-skript för seriell kommunikation, ska implementeras för VG.
 ```
 
 ## Git och versionshantering
@@ -426,18 +426,17 @@ make clean
 * Tillägg av enhetstester för angivna komponenter implementerade och fungerande.
 * Väl utformade stubklasser som korrekt simulerar hårdvarabeteende.
 * Komponenttester för logik-implementationen implementerade och fungerande.
-* Dokumentation av minst 5 icke-automatiserbara tester.
+* Dokumentation av fem icke-automatiserbara tester.
 * Kod följer projektets stilguide.
 * Tester använder Google Test korrekt.
+* **Kortfattat:** Följ med under lektionerna och genomför lektionsuppgifterna.
 
 ### Väl Godkänd (VG)
 * Alla G-krav uppfyllda.
-* Omfattande testning av edge cases och felhantering.
+* Minst fem nya (egna) mjukvarutester för edge cases och felhantering.
 * Python-skript för seriell kommunikation implementerat enligt specifikationer och fungerande.
 * Användning av Python-skriptet för att automatisera flera integrationstest.
-* Komplett integrationstestdokumentation (>10 tester).
-* Analys och reflektion kring testbarhet och förbättringar.
-* Parametriserade tester för att testa flera konfigurationer effektivt.
+* **Kortfattat:** Samma som för G, samt fem egna mjukvarutester och ett Python-skript.
 
 ## Inlämning
 

@@ -1,6 +1,7 @@
 # L05 - Komponenttester (del I)
 
 ## Dagordning
+* Slutförande av unit-tester för timer-drivern.
 * Introduktion till komponenttester och skillnaden mot unittester.
 * Inspektion av befintliga stub-implementationer.
 * Demonstration: Skapande av en stub-klass för GPIO-drivern.
@@ -12,8 +13,6 @@
 * Kunna analysera befintliga stub-implementationer.
 * Kunna skapa egna stubklasser som implementerar drivrutins-interface.
 * Förstå hur man ersätter hårdvaruberoenden med kontrollerbara stub-implementationer.
-* **Huvudmål**: Implementera en första version av alla stubklasser så att komponentester för systemlogiken i
-[logic_test.cpp](../../library/test/logic/logic_test.cpp) kan kompilera (även om testerna inte nödvändigtvis går igenom).
 
 ## Förutsättningar
 * Genomgång av L01-L04 och förståelse för unittester.
@@ -74,4 +73,4 @@ make
 
 ## Nästa lektion
 * Utveckling av befintliga stubklasser så att befintliga komponenttester fungerar.
-* Tillägg av ytterligare komponenttester.
+* Implementering av testfall enligt kommenterade instruktioner.

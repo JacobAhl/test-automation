@@ -17,7 +17,7 @@ Erik Pihl ([erik.axel.pihl@gmail.com](mailto:erik.axel.pihl@gmail.com))
 | 4 | 22/1 | [L07](../lectures/L07/README.md) | Implementering av nya komponenttester för systemlogiken |
 | 4 | 23/1 | [L08](../lectures/L08/README.md) | Manuell SW/HW-integrationstestning |
 | 5 | 27/1 | [L09](../lectures/L09/README.md) | Automatisk SW/HW-integrationstestning |
-| 5 | 30/1 | [L10](../lectures/L10/README.md) | Projektpresentation och kursavslutning |
+| 5 | 30/1 | [L10](../lectures/L10/README.md) | Slutförande av testsvit och kursavslutning |
 
 ## Kursmaterial
 
