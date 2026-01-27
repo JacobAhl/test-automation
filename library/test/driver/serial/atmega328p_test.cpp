@@ -14,8 +14,6 @@
 
 #ifdef TESTSUITE
 
-
-//! @todo Implement tests according to project requirements.
 namespace driver
 {
 namespace
@@ -71,10 +69,9 @@ void simulateDataReg(const bool& stop) noexcept
 // -----------------------------------------------------------------------------
 void printThread(serial::Interface& serial, const std::string& msg, bool& stop) noexcept
 {
-    //! @todo Implement this function!
-    
-    // Transmit the entire string, convert to a C string(const char*).
-    serial.printf("%s",msg.c_str());
+    // Transmit the entire string, convert to a C string (const char*).
+    serial.printf(msg.c_str());
+
     // Set the stop flag to true to signal that transmission is complete.
     stop = true;
 }
@@ -92,12 +89,17 @@ void readDataRegThread(const std::string& msg, const bool& stop) noexcept
         while (utils::read(UCSR0A, UDRE0) && !stop) { delay_us(TransmissionDelay_us); }
 
         // If stop flag is set, break out of the loop.
-        if (stop){ break; } 
+        if (stop)
+        {
+            break;
+        }
 
         // Read the character from UDR0 and verify it matches the expected character.
-        EXPECT_EQ(c, static_cast<char>(UDR0));
+        EXPECT_EQ( static_cast<char> (UDR0), c);
         // Set UDRE0 to signal that the data has been read and the register is empty.
         utils::set(UCSR0A,UDRE0);
+        
+        
     }
 }
 
