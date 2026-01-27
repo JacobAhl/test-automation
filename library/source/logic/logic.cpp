@@ -2,6 +2,7 @@
  * @brief Generic logic implementation details for an MCU with configurable hardware devices.
  */
 #include <stdint.h>
+#include <stdio.h>
 
 #include "driver/adc/interface.h"
 #include "driver/eeprom/interface.h"
@@ -116,6 +117,7 @@ void Logic::run(const bool& stop) noexcept
 // -----------------------------------------------------------------------------
 void Logic::handleButtonEvent() noexcept
 {
+
     // Ignore if this call was done manually.
     if (myDebounceTimer.isEnabled()) { return; }
     
