@@ -17,10 +17,7 @@
 #include "driver/eeprom/atmega328p.h"
 #include "driver/gpio/atmega328p.h"
 #include "driver/serial/atmega328p.h"
-<<<<<<< HEAD
 #include "driver/tempsensor/tmp36.h"
-=======
->>>>>>> smart-sensor
 #include "driver/tempsensor/smart.h"
 #include "driver/timer/atmega328p.h"
 #include "driver/watchdog/atmega328p.h"

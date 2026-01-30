@@ -19,9 +19,6 @@ namespace
 /** Maximum number of timer circuits available on ATmega328P. */
 constexpr std::uint8_t MaxTimerCount{3U};
 
-//! @todo Remove this #ifdef when starting to work on the callback test.
-#ifdef CALLBACK
-
 /** Flag to track if callback was invoked. */
 bool callbackInvoked{false};
 
@@ -38,9 +35,6 @@ constexpr std::uint32_t getMaxCount(const std::uint32_t timeout_ms) noexcept
 	return 0U < timeout_ms ? 
         utils::round<std::uint32_t>(timeout_ms / interruptIntervalMs) : 0U;
 }
-
-//! @todo Remove this #endif when starting to work on the callback test.
-#endif /** CALLBACK */
 
 /**
  * @brief Timer initialization test.
@@ -130,11 +124,18 @@ TEST(Timer_Atmega328p, Timeout)
 {
     //! @todo Test timer timeout:
         // Create a timer with an initial timeout of 100 ms.
+        timer::Atmega328p timer0{100U};
+        EXPECT_TRUE(timer0.isInitialized());
         // Verify timeout_ms() returns the correct value.
+        EXPECT_EQ(timer0.timeout_ms(), 100U);
         // Change the timeout to 200 ms using setTimeout_ms().
+        timer0.setTimeout_ms(200U);
         // Verify the new timeout is returned by timeout_ms().
+        EXPECT_EQ(timer0.timeout_ms(), 200U);
         // Change the timeout to 0 ms using setTimeout_ms().
+        timer0.setTimeout_ms(0U);
         // Verify that the timeout is unchanged (0 ms is an invalid timeout).
+        EXPECT_EQ(timer0.timeout_ms(), 200U);
 }
 
 /**
@@ -146,9 +147,24 @@ TEST(Timer_Atmega328p, Callback)
 {
     //! @todo Test timer callback:
         // Reset the callback flag (callbackInvoked) using resetCallbackFlag().
+        resetCallbackFlag();
+        EXPECT_FALSE(callbackInvoked);
         // Create a timer with a short timeout, such as 10 ms, and testCallback() as callback.
+        constexpr uint16_t timeout_ms{10U};
+        timer::Atmega328p timer0{timeout_ms, testCallback};
+
+        EXPECT_TRUE(timer0.isInitialized());
         // Start the timer.
+        timer0.start(); 
+
         // Simulate timer interrupts by repeatedly calling handleCallback() on the timer.
+        const auto n = getMaxCount(timeout_ms);
+
+        for (std::uint32_t i = 0; i < n; ++i) {
+             timer0.handleCallback();
+        }
+
+        EXPECT_TRUE(callbackInvoked);
         // Call handleCallback() enough times to reach the timeout (getMaxCount()).
         // Verify that callbackInvoked is true after timeout.
         // Note: handleCallback() increments the timer and invokes the callback when timeout is reached.
@@ -163,14 +179,40 @@ TEST(Timer_Atmega328p, Restart)
 {
     //! @todo Test timer restart:
         // Reset the callback flag (callbackInvoked) using resetCallbackFlag().
+        resetCallbackFlag();
         // Create and start a timer with testCallback() as callback.
+        constexpr uint16_t timeout_ms{100U};
+        timer::Atmega328p timer0{timeout_ms, testCallback};
         // Call handleCallback() enough times to almost reach the timeout (getMaxCount() - 1).
+        const auto n = (getMaxCount(timeout_ms) - 1);
+
+        for (std::uint32_t i = 0; i < n; ++i) {
+             timer0.handleCallback();
+        }
+
+        EXPECT_FALSE(callbackInvoked);
         // Verify that the callback flag (callbackInvoked) is still false.
         // Restart the timer.
+        timer0.restart();
         // Verify that the timer is still enabled after restart.
+        EXPECT_TRUE(timer0.isEnabled());
         // Call handleCallback() enough times to almost reach the timeout (getMaxCount() - 1).
         // Verify that the callback flag (callbackInvoked) is still false, since the timer was restarted.
+        const auto p = (getMaxCount(timeout_ms) - 1);
+
+        for (std::uint32_t i = 0; i < p; ++i) {
+             timer0.handleCallback();
+        }
+
+        EXPECT_FALSE(callbackInvoked);
         // Call handleCallback() again to reach timeout.
+        const auto c = (getMaxCount(timeout_ms));
+
+        for (std::uint32_t i = 0; i < c; ++i) {
+             timer0.handleCallback();
+        }
+
+        EXPECT_TRUE(callbackInvoked);
         // Verify that the callback flag (callbackInvoked) is true due to timeout.
 }
 
@@ -179,5 +221,4 @@ TEST(Timer_Atmega328p, Restart)
 } // namespace
 } // namespace driver
 
-//! @todo Remove this #endif in lecture 4 to enable these tests.
 #endif /** TESTSUITE */
